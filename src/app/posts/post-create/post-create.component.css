@@ -8,7 +8,19 @@ textarea {
   margin-top: 1rem;
 }
 
-mar-card {
-  background-color: white;
-  color: black;
+mat-spinner {
+  margin: auto;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
 }
