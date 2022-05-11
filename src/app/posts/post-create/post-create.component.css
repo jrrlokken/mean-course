@@ -1,0 +1,14 @@
+mat-form-field,
+textarea {
+  width: 100%;
+}
+
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+mar-card {
+  background-color: white;
+  color: black;
+}
