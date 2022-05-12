@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Post } from '../post.model';
 
+import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
 
 @Component({
@@ -38,16 +38,19 @@ export class PostCreateComponent implements OnInit {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
         this.isLoading = true;
+        console.log(this.mode, this.postId, this.isLoading);
         this.postsService.getPost(this.postId).subscribe((postData) => {
           this.isLoading = false;
           this.post = {
             id: postData._id,
             title: postData.title,
             content: postData.content,
+            imagePath: postData.imagePath,
           };
           this.form.setValue({
             title: this.post.title,
             content: this.post.content,
+            image: this.post.imagePath,
           });
         });
       } else {
@@ -67,18 +70,24 @@ export class PostCreateComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
   onSavePost() {
     if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === 'create') {
-      this.postsService.addPost(this.form.value.title, this.form.value.content);
+      this.postsService.addPost(
+        this.form.value.title,
+        this.form.value.content,
+        this.form.value.image
+      );
     } else {
       this.postsService.updatePost(
         this.postId,
         this.form.value.title,
-        this.form.value.content
+        this.form.value.content,
+        this.form.value.image
       );
     }
     this.form.reset();
