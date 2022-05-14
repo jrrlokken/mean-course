@@ -9,9 +9,7 @@ const authRoutes = require("./routes/auth");
 const app = express();
 
 mongoose
-  .connect(
-    "mongodb+srv://mean-course:meanCourse@mean-course-cluster.mnd0h.mongodb.net/node-angular?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to database...");
   })
